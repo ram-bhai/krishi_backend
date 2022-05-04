@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,5 +19,15 @@
     "mongoose": "^6.3.2",
     "nodemailer": "^6.7.5",
     "winston": "^3.7.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ram-bhai/krishi_backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ram-bhai/krishi_backend/issues"
+  },
+  "homepage": "https://github.com/ram-bhai/krishi_backend#readme",
+  "description": ""
 }
