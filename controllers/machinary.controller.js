@@ -50,7 +50,8 @@ exports.update = (request, response) => {
 exports.delete=(request,response)=>{
     machinaryM.deleteOne({_id:request.params.id})
     .then((result)=>{
-        console.log("Deleted sucessfully...")
+        console.log("Deleted sucessfully...");
+        console.log(result);
         return response.status(201).json(result);
     }).catch(err=>{
         console.log(err);
