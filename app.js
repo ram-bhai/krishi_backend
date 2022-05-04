@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const port = process.env.PORT || 3000;
+const path = require('path');
 const mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://group:group@cluster0.njsxd.mongodb.net/krishi?retryWrites=true&w=majority").then(result => {
     console.log("Database has been connected")
@@ -16,9 +17,11 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, "public")));
+//app.use(express.static(path.join(__dirname, "public")));
+
+
 app.use("/admin", adminRouter);
-//app.use("/user", userRouter);
+app.use("/user", userRouter);
 app.use("/", (request, response) => {
     response.send("Welcome in krishi platform");
 })
