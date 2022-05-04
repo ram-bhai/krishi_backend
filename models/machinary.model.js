@@ -19,6 +19,7 @@ const toolSchema = new mongoose.Schema({
         type: String
     },
     customer: [{
+
         user: Schema.Types.ObjectId,
         bookingDate: Date,
         location: String,

@@ -13,6 +13,7 @@ mongoose.connect("mongodb+srv://group:group@cluster0.njsxd.mongodb.net/krishi?re
 const substore = require("./routes/substorage.routes");
 const stores = require("./routes/store.routes");
 const adminRouter = require("./routes/admin.routes");
+const machinaryrouter = require('./routes/machinary.routes');
 const userRouter = require("./routes/user.router");
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(bodyParser.json());
 app.use("/substore", subStorage);
 app.use("/store", stores);
 app.use("/admin", adminRouter);
+app.use("/machinary",machinaryrouter);
 app.use("/user", userRouter);
 
 
