@@ -8,7 +8,7 @@ router.post("/signup",
     body("name").notEmpty(),
     body("email").isEmail(),
     body("password").notEmpty(),
-    body("mobile").isLength(10),
+    body("contact").isLength(10),
     body("occupation").notEmpty(),
     body("address").notEmpty(), userController.signup);
 
