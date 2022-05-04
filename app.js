@@ -9,16 +9,16 @@ mongoose.connect("mongodb+srv://group:group@cluster0.njsxd.mongodb.net/krishi?re
     console.log("Unable to connect from database")
 })
 const adminRouter = require("./routes/admin.routes");
-const userRouter = require("./routes/user.router");
+const machinaryrouter = require('./routes/machinary.router');
 
 const app = express();
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, "public")));
+
 app.use("/admin", adminRouter);
-//app.use("/user", userRouter);
+app.use("/machinary",machinaryrouter);
 app.use("/", (request, response) => {
     response.send("Welcome in krishi platform");
 })

@@ -20,7 +20,7 @@ const toolSchema = new mongoose.Schema({
     },
     customer: [{
         user: Schema.Types.ObjectId,
-        ref: "users",
+        //ref: "users",
         bookingDate: Date,
         location: {
             type: String
@@ -36,7 +36,7 @@ const toolSchema = new mongoose.Schema({
     },
     reviews: [{
         user: Schema.Types.ObjectId,
-        ref: "users",
+        //ref: "users",
         feedback: {
             type: String
         }
@@ -47,4 +47,4 @@ const toolSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("users", toolSchema);
+module.exports = mongoose.model("tools", toolSchema);
