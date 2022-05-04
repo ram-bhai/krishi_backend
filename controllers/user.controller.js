@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 const config = require('config');
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
-
+const {printLogger} = require('../core/utility');
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -44,17 +44,20 @@ exports.signup = async (request, response) => {
               console.log(error);
             } else {
               console.log('Email sent: ' + info.response);
-              return response.status(200).json({ msg: 'Welcome' + '' + result.name });
+              printLogger(2, `*********** send mail *************${JSON.stringify(result)}`, 'signup');
+              return response.status(200).json({ msg: 'Welcome' + ' ' + result.name });
   
             }
           })
               
             }).catch(err=>{
                 console.log(err);
+                printLogger(0, `*********** signup *************${JSON.stringify(err)}`, 'signup');
                 return response.status(404).json({ msg: 'not saved' });
               })
         }catch(err){
             console.log(err);
+            printLogger(4, `***********signup error  *************${JSON.stringify(err)}`, 'signup');
             return response.status(500).json({ msg: 'error find...' });
         }
            
