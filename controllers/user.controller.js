@@ -15,16 +15,19 @@ var transporter = nodemailer.createTransport({
   });
   
 exports.signup = async (request, response) => {
+
     const errors = validationResult(request);
-    if (!errors.isEmpty())
+    if (!errors.isEmpty()){
+      console.log(errors);
         return response.status(400).json({ errors: errors.array() });
+    }
         const { name, email, password, contact ,occupation,address} = request.body;
         try {
             let user = await User.findOne({ email });
             if (user) {
               return response.status(400).json({ msg: "already exists" })
             }
-            user = new User({ name, email, contact, password,occupation,address });
+            user = new User({ name, email,  password,occupation,contact,address });
             const salt = await bcrypt.genSalt(10);
             user.password = await bcrypt.hash(password, salt);
             user.save().then(result => {
@@ -105,7 +108,7 @@ exports.signin = async (request, response) => {
         { expiresIn: '5 days' },
         (err, token) => {
           if (err) throw err;
-          response.json({ token });
+          response.json({msg: token });
         }
       );
     } catch (err) {
