@@ -11,12 +11,12 @@ const subStorageSchema = new mongoose.Schema({
         required: true
     },
     isAvailable: {
-        type: Boolean
+        type: Boolean,
+        default:true
 
     },
     items: [{
         type: String,
-        required: true
     }],
     images: [{
         type: String,
@@ -39,7 +39,7 @@ const subStorageSchema = new mongoose.Schema({
     }],
     description: {
         type: String,
-        required: true
+        required:true
     },
     review: [{
         user: Schema.Types.ObjectId,
