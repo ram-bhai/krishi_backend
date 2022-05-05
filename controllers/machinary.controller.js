@@ -29,13 +29,13 @@ exports.view = (request, response) => {
 
 }
 exports.update = (request, response) => {
-    machinaryM.updateOne({ _id: request.body.id},
+    machinaryM.updateOne({ _id: request.params.id},
         {
             $set: {
-                a:request.body.name,
-                b:request.body.images,
-                c:request.body.travelling_charges,
-                d:request.body.desc
+                name:request.body.name,
+                images:request.body.images,
+                travelling_charges:request.body.travelling_charges,
+                desc:request.body.desc
             }
          })
           .then(result => {

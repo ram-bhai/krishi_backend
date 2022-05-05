@@ -10,10 +10,10 @@ mongoose.connect("mongodb+srv://group:group@cluster0.njsxd.mongodb.net/krishi?re
     console.log("Unable to connect from database")
 })
 
-const substore = require("./routes/substorage.routes");
+const substoreRouter = require("./routes/substorage.routes");
 const stores = require("./routes/store.routes");
 const adminRouter = require("./routes/admin.routes");
-const machinaryrouter = require('./routes/machinary.routes');
+const machinaryRouter = require('./routes/machinary.routes');
 const userRouter = require("./routes/user.router");
 
 const app = express();
@@ -21,15 +21,19 @@ app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//app.use(express.static(path.join(__dirname, "public")));
 
 
+<<<<<<< HEAD
+=======
+
+app.use("/substore", substoreRouter);
+>>>>>>> fb15fbc83c47aba0b7d4bf9f527f1f51b99dcc03
 app.use("/store", stores);
 app.use("/admin", adminRouter);
-app.use("/machinary", machinaryrouter);
+app.use("/machinary",machinaryRouter);
 app.use("/user", userRouter);
 
 
 app.listen(port, () => {
     console.log("server running at port no." + port)
-})
+});
