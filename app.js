@@ -23,8 +23,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
+<<<<<<< HEAD
+=======
 
 app.use("/substore", substoreRouter);
+>>>>>>> fb15fbc83c47aba0b7d4bf9f527f1f51b99dcc03
 app.use("/store", stores);
 app.use("/admin", adminRouter);
 app.use("/machinary",machinaryRouter);
