@@ -23,5 +23,8 @@ router.post("/contact",
     body("email").isEmail(),
     body("message").notEmpty(), auth, userController.contact);
 
+router.post("/contract-farming",
+    body("name"))
+
 
 module.exports = router;
