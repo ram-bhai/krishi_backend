@@ -4,7 +4,6 @@ const { body } = require('express-validator');
 const storeController = require("../controllers/store.controller");
 
 
-router.post("/addStore",
-    body("name").notEmpty(), storeController.add);
+router.post("/addStore",body("name").notEmpty(), storeController.add);
 
 module.exports = router;
