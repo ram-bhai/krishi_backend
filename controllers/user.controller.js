@@ -1,6 +1,7 @@
 const { validator, validationResult } = require('express-validator');
 const User = require('../models/user.model');
 const queries = require('../models/query.models');
+const contract = require('../models/contract_farming.model')
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const config = require('config');
@@ -131,5 +132,30 @@ exports.contact = (request, response) => {
     }).catch(error => {
         return response.status(500).json(error)
     })
+
+}
+
+exports.contract = (request, response) => {
+    const errors = validationResult(request)
+    if (!errors.isEmpty)
+        return response.status(400).json({ errors: errors.array() });
+
+    contract.create({
+        name: request.body.name,
+        mobile: request.body.mobile,
+        image: request.body.image,
+        Area: request.body.area,
+        address: request.body.address,
+        verification: request.body.verification,
+        start_date: request.body.startdate,
+        end_date: request.body.enddate,
+        isApproved: request.body.isapproved
+
+    }).then(result => {
+        return response.status(200).json(result)
+    }).catch(error => {
+        return response.status(500).json(error)
+    })
+
 
 }
