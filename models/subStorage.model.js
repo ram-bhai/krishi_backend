@@ -12,20 +12,25 @@ const subStorageSchema = new mongoose.Schema({
     },
     isAvailable: {
         type: Boolean,
-        default:true
+        default: true
 
     },
     items: [{
-        type: String,
+        name: {
+            type: String,
+        },
+        charges: {
+            type: String,
+        },
+        description: {
+            type: String,
+        }
     }],
     images: [{
         type: String,
         required: true,
         unique: true
     }],
-    charges: {
-        type: String,
-    },
     location: {
         type: String,
         required: true
@@ -37,10 +42,6 @@ const subStorageSchema = new mongoose.Schema({
         start_date: Date,
         end_date: Date
     }],
-    description: {
-        type: String,
-        required:true
-    },
     review: [{
         user: Schema.Types.ObjectId,
         feedback: String
