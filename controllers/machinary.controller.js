@@ -9,7 +9,7 @@ exports.add = (request, response) => {
     let c = request.body.charges;
     let d = request.body.travelling_charges;
     let e = request.body.desc;
-    console.log(request);
+    //console.log(request);
     machinaryM.create({ toolname: a, images: b, charges: c, travelling_charges: d, desc: e }).then(result => {
         return response.status(201).json(result);
     }).catch(err => {
