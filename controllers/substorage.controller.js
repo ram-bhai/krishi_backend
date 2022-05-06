@@ -10,26 +10,27 @@ exports.add = (request, response) => {
             isAvailable: request.body.isAvailable,
             location: request.body.location,
             images: request.body.images,
+            description_1: request.body.description_1,
         })
         .then(result => {
-            return response.status(201).json(result);
+            return response.status(200).json(result);
         }).catch(err => {
             console.log(err);
             return response.status(500).json({ err: "server err.." })
         });
 }
 
-exports.additems = async(request, response) => {
+exports.additems = async (request, response) => {
     const item = {
         name: request.body.name,
         charges: request.body.charges,
         description: request.body.description
     }
-    let storage = await substorageM.findOne({ _id: request.body.id });
+    let storage = await substorageM.findOne({ _id: request.body.storage_id });
     console.log(storage);
     storage.items.push(item);
     storage.save().then(result => {
-        return response.status(201).json(result)
+        return response.status(200).json(result)
     }).catch(
         err => {
             return response.status(500).json(err);
@@ -38,7 +39,7 @@ exports.additems = async(request, response) => {
 
 exports.view = (request, response) => {
     substorageM.find().then(result => {
-        return response.status(201).json(result);
+        return response.status(200).json(result);
     }).catch(err => {
         console.log(err);
         return response.status(500).json({ err: "server err..." })
@@ -47,7 +48,7 @@ exports.view = (request, response) => {
 
 exports.delete = (request, response) => {
     substorageM.deleteOne({ _id: request.params.id }).then(result => {
-        return response.status(201).json(result);
+        return response.status(200).json(result);
     }).catch(err => {
         return response.status(500).json({ err: "server err..." })
     });
@@ -63,8 +64,7 @@ exports.update = (request, response) => {
              }
         })
         .then(result => {
-            console.log(result);
-            return response.status(201).json(result);
+            return response.status(200).json(result);
         }).catch(err => {
             console.log(err);
             return response.status(500).json({ err: "server err.." })
