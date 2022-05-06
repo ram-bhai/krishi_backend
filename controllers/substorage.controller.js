@@ -36,9 +36,6 @@ exports.additems = async(request, response) => {
         })
 }
 
-
-
-
 exports.view = (request, response) => {
     substorageM.find().then(result => {
         return response.status(201).json(result);
@@ -61,10 +58,9 @@ exports.update = (request, response) => {
             $set: {
                 total_space: request.body.total_space,
                 isAvailable: request.body.isAvailable,
-                items: request.body.items,
-                charges: request.body.charges,
-                description: request.body.description
-            }
+                images: request.body.images,
+                location: request.body.location       
+             }
         })
         .then(result => {
             console.log(result);
