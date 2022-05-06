@@ -9,9 +9,9 @@ exports.add = (request, response) => {
     let c = request.body.charges;
     let d = request.body.travelling_charges;
     let e = request.body.desc;
-    console.log(request);
+    //console.log(request);
     machinaryM.create({ toolname: a, images: b, charges: c, travelling_charges: d, desc: e }).then(result => {
-        return response.status(201).json(result);
+        return response.status(200).json(result);
     }).catch(err => {
         console.log(err);
         return response.status().json({ err: "Server Err..." })
@@ -40,7 +40,7 @@ exports.update = (request, response) => {
          })
           .then(result => {
               console.log(result);
-            return response.status(201).json(result);
+            return response.status(200).json(result);
         }).catch(err => {
             console.log(err);
             return response.status(500).json({ err: "server err.." })
@@ -52,7 +52,7 @@ exports.delete=(request,response)=>{
     .then((result)=>{
         console.log("Deleted sucessfully...");
         console.log(result);
-        return response.status(201).json(result);
+        return response.status(200).json(result);
     }).catch(err=>{
         console.log(err);
         return response.status(500).json({err:"server err..."})
