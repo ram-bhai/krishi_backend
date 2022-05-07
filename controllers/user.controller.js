@@ -60,7 +60,7 @@ exports.signup = async(request, response) => {
         })
     } catch (err) {
         console.log(err);
-        printLogger(4, `***********signup error  *************${JSON.stringify(err)}`, 'signup');
+        printLogger(4, `*********** signup error  *************${JSON.stringify(err)}`, 'signup');
         return response.status(500).json({ msg: 'error find...' });
     }
 
@@ -71,13 +71,6 @@ exports.signin = async(request, response) => {
     const errors = validationResult(request);
     if (!errors.isEmpty())
         return response.status(400).json({ errors: errors.array() });
-
-    // User.findOne({ email: request.body.email, password: request.body.password }).then(result => {
-    //     return response.status(200).json(result)
-    // }).catch(error => {
-    //     return response.status(401).json(error)
-    // })
-
     const { email, password } = request.body;
 
     try {
@@ -127,9 +120,9 @@ exports.contact = (request, response) => {
         message: request.body.message,
         name: request.body.name,
         email: request.body.email
-    }).then(result => {
+       }).then(result => {
         return response.status(200).json({ message: "Message recieved" })
-    }).catch(error => {
+      }).catch(error => {
         return response.status(500).json(error)
     })
 
@@ -151,11 +144,9 @@ exports.contract = (request, response) => {
         end_date: request.body.enddate,
         isApproved: request.body.isapproved
 
-    }).then(result => {
+        }).then(result => {
         return response.status(200).json(result)
-    }).catch(error => {
+      }).catch(error => {
         return response.status(500).json(error)
     })
-
-
 }
