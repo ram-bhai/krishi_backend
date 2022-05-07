@@ -10,16 +10,17 @@ exports.add = (request, response) => {
             isAvailable: request.body.isAvailable,
             location: request.body.location,
             images: request.body.images,
+            description_1: request.body.description_1,
         })
         .then(result => {
-            return response.status(201).json(result);
+            return response.status(200).json(result);
         }).catch(err => {
             console.log(err);
             return response.status(500).json({ err: "server err.." })
         });
 }
 
-exports.additems = async(request, response) => {
+exports.additems = async (request, response) => {
     const item = {
         name: request.body.name,
         charges: request.body.charges,
@@ -29,12 +30,13 @@ exports.additems = async(request, response) => {
     console.log(storage);
     storage.items.push(item);
     storage.save().then(result => {
-        return response.status(201).json(result)
+        return response.status(200).json(result)
     }).catch(
         err => {
             return response.status(500).json(err);
         })
 }
+
 
 // exports.viewItems = async(request, response) => {
 //     var storage = await substorageM.findOne({ _id: request.params.id });
@@ -91,10 +93,9 @@ exports.deleteitems = async(request, response) => {
         })
 }
 
-
 exports.view = (request, response) => {
     substorageM.find().then(result => {
-        return response.status(201).json(result);
+        return response.status(200).json(result);
     }).catch(err => {
         console.log(err);
         return response.status(500).json({ err: "server err..." })
@@ -103,7 +104,7 @@ exports.view = (request, response) => {
 
 exports.delete = (request, response) => {
     substorageM.deleteOne({ _id: request.params.id }).then(result => {
-        return response.status(201).json(result);
+        return response.status(200).json(result);
     }).catch(err => {
         return response.status(500).json(err, { error: "server error" })
     });
@@ -114,14 +115,12 @@ exports.update = (request, response) => {
             $set: {
                 total_space: request.body.total_space,
                 isAvailable: request.body.isAvailable,
-                items: request.body.items,
-                charges: request.body.charges,
-                description: request.body.description
-            }
+                images: request.body.images,
+                location: request.body.location       
+             }
         })
         .then(result => {
-            console.log(result);
-            return response.status(201).json(result);
+            return response.status(200).json(result);
         }).catch(err => {
             console.log(err);
             return response.status(500).json({ err: "server err.." })

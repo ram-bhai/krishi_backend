@@ -9,9 +9,9 @@ exports.add = (request, response) => {
     let c = request.body.charges;
     let d = request.body.travelling_charges;
     let e = request.body.desc;
-    console.log(request);
+    //console.log(request);
     machinaryM.create({ toolname: a, images: b, charges: c, travelling_charges: d, desc: e }).then(result => {
-        return response.status(201).json(result);
+        return response.status(200).json(result);
     }).catch(err => {
         console.log(err);
         return response.status().json({ err: "Server Err..." })
@@ -36,16 +36,24 @@ exports.update = (request, response) => {
                 travelling_charges: request.body.travelling_charges,
                 desc: request.body.desc
             }
+<<<<<<< HEAD
         })
         .then(result => {
             console.log(result);
             return response.status(201).json(result);
+=======
+         })
+          .then(result => {
+              console.log(result);
+            return response.status(200).json(result);
+>>>>>>> 44a86c4772984d5d0dfcdca3c11d6fd30ece375b
         }).catch(err => {
             console.log(err);
             return response.status(500).json({ err: "server err.." })
         });
 }
 
+<<<<<<< HEAD
 exports.delete = (request, response) => {
     machinaryM.deleteOne({ _id: request.params.id })
         .then((result) => {
@@ -56,6 +64,18 @@ exports.delete = (request, response) => {
             console.log(err);
             return response.status(500).json({ err: "server err..." })
         });
+=======
+exports.delete=(request,response)=>{
+    machinaryM.deleteOne({_id:request.params.id})
+    .then((result)=>{
+        console.log("Deleted sucessfully...");
+        console.log(result);
+        return response.status(200).json(result);
+    }).catch(err=>{
+        console.log(err);
+        return response.status(500).json({err:"server err..."})
+    });
+>>>>>>> 44a86c4772984d5d0dfcdca3c11d6fd30ece375b
 }
 
 exports.bookmachines = async(request, response) => {
