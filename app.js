@@ -15,6 +15,7 @@ const stores = require("./routes/store.routes");
 const adminRouter = require("./routes/admin.routes");
 const machinaryRouter = require('./routes/machinary.routes');
 const userRouter = require("./routes/user.router");
+const searchRouter = require('./routes/search.routes');
 
 const app = express();
 app.use(cors());
@@ -28,6 +29,7 @@ app.use("/store", stores);
 app.use("/admin", adminRouter);
 app.use("/machinary", machinaryRouter);
 app.use("/user", userRouter);
+app.use("/search",searchRouter);
 
 
 app.listen(port, () => {
