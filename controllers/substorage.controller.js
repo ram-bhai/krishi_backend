@@ -105,7 +105,7 @@ exports.delete = (request, response) => {
     substorageM.deleteOne({ _id: request.params.id }).then(result => {
         return response.status(201).json(result);
     }).catch(err => {
-        return response.status(500).json({ err: "server err..." })
+        return response.status(500).json(err, { error: "server error" })
     });
 }
 
@@ -127,3 +127,34 @@ exports.update = (request, response) => {
             return response.status(500).json({ err: "server err.." })
         });
 }
+
+exports.bookstorage = async(request, response) => {
+    const bookingstorage = {
+        user: request.params.id,
+        item: request.body.itemid,
+        start_date: request.body.date,
+        end_date: request.body.valid_till,
+        measurement: request.body.quantity,
+    }
+    console.log(bookingstorage);
+    let storage = await substorageM.findOne({ _id: request.body.id });
+    console.log(storage);
+    storage.customers.push(bookingstorage);
+    storage.save().then(result => {
+        return response.status(201).json(result)
+    }).catch(
+        err => {
+            return response.status(500).json(err);
+        })
+
+}
+
+// exports.customerlist = async (request,response)=>{
+//     var storage = await substorageM.findOne({_id:request.params.id})
+//     if(storage){
+//         for (let i = 0; i < storage.customers.length; i++) {
+//             if (storage.customers[i].name == request.body.id) {
+//                 storage.customers.pull({ _id: request.body.id });
+
+//     }
+// }

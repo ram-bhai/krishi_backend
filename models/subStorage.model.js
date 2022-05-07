@@ -37,10 +37,11 @@ const subStorageSchema = new mongoose.Schema({
     },
     customers: [{
         user: Schema.Types.ObjectId,
+        item: Schema.Types.ObjectId,
         amount: String,
         measurement: String,
         start_date: Date,
-        end_date: Date
+        end_date: Date,
     }],
     review: [{
         user: Schema.Types.ObjectId,
