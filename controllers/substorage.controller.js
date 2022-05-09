@@ -154,25 +154,27 @@ exports.itemsofcustomer = async(request, response) => {
         weight: request.body.weight,
         isAvailable: request.body.isAvailable
     }
+    console.log(products);
+    var result;
     var storage = await substorageM.findOne({ _id: request.body.storageid })
     if (storage) {
-        var result = storage.customers.filter(obj => {
+        result = storage.customers.filter(obj => {
             return obj._id == (request.body.id)
         })
-        console.log(result.item);
+        console.log(result);
+        result[0].item.push(products);
+        result[0].save().then(next => {
+            storage.save().then(result => {
+                return response.status(201).json(result)
+            }).catch(
+                err => {
+                    return response.status(500).json(err);
+                }).catch(error => {
+                return response.status(403).json(error, { error: "unable to reach from item in customers" })
+            })
 
-        // result.save().then(next => {
-        //     storage.save().then(result => {
-        //         return response.status(201).json(result)
-        //     }).catch(
-        //         err => {
-        //             return response.status(500).json(err);
-        //         }).catch(error => {
-        //         return response.status(403).json(error, { error: "unable to reach from item in customers" })
-        //     })
 
 
-
-        // })
+        })
     }
 }
