@@ -8,39 +8,50 @@ const subStorageSchema = new mongoose.Schema({
     },
     total_space: {
         type: String,
-        required: true
+
     },
     isAvailable: {
         type: Boolean,
-        default:true
+        default: true
 
     },
     items: [{
-        type: String,
+        name: {
+            type: String,
+        },
+        charges: {
+            type: String,
+        },
+        description: {
+            type: String,
+        }
     }],
     images: [{
         type: String,
         required: true,
         unique: true
     }],
-    charges: {
-        type: String,
-    },
     location: {
         type: String,
-        required: true
+
+    },
+    description_1: {
+        type: String,
+
     },
     customers: [{
-        user: Schema.Types.ObjectId,
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "users"
+        },
         amount: String,
-        measurement: String,
         start_date: Date,
-        end_date: Date
+        item: [{
+            name: String,
+            weight: String,
+            isAvailable: Boolean
+        }]
     }],
-    description: {
-        type: String,
-        required:true
-    },
     review: [{
         user: Schema.Types.ObjectId,
         feedback: String

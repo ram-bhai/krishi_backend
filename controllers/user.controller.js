@@ -60,7 +60,7 @@ exports.signup = async(request, response) => {
         })
     } catch (err) {
         console.log(err);
-        printLogger(4, `***********signup error  *************${JSON.stringify(err)}`, 'signup');
+        printLogger(4, `*********** signup error  *************${JSON.stringify(err)}`, 'signup');
         return response.status(500).json({ msg: 'error find...' });
     }
 
@@ -147,15 +147,11 @@ exports.contract = (request, response) => {
         
         duration: request.body.duration,
         description: request.body.description
-    
-
-    }).then(result => {
- console.log("result"+result);
+   
+        }).then(result => {
         return response.status(200).json(result)
-    }).catch(error => {
-        console.log("error"+error);
+      }).catch(error => {
+
         return response.status(500).json(error)
     })
-
-
 }
