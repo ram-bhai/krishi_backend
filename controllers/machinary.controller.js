@@ -41,17 +41,12 @@ exports.update = (request, response) => {
         .then(result => {
             console.log(result);
             return response.status(201).json(result);
-
-        })
-        .then(result => {
-            console.log(result);
-            return response.status(200).json(result);
-
         }).catch(err => {
             console.log(err);
             return response.status(500).json({ err: "server err.." })
         });
 }
+
 
 exports.delete = (request, response) => {
     machinaryM.deleteOne({ _id: request.params.id })
@@ -63,6 +58,18 @@ exports.delete = (request, response) => {
             console.log(err);
             return response.status(500).json({ err: "server err..." })
         });
+    }
+
+exports.delete=(request,response)=>{
+    machinaryM.deleteOne({_id:request.params.id})
+    .then((result)=>{
+        console.log("Deleted sucessfully...");
+        console.log(result);
+        return response.status(200).json(result);
+    }).catch(err=>{
+        console.log(err);
+        return response.status(500).json({err:"server err..."})
+    });
 }
 
 exports.delete = (request, response) => {
@@ -99,4 +106,3 @@ exports.bookmachines = async(request, response) => {
 
 }
 
-exports.cancellmachine = (request, response) => {}
