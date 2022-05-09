@@ -36,24 +36,24 @@ exports.update = (request, response) => {
                 travelling_charges: request.body.travelling_charges,
                 desc: request.body.desc
             }
-<<<<<<< HEAD
+
         })
         .then(result => {
             console.log(result);
             return response.status(201).json(result);
-=======
+
          })
           .then(result => {
               console.log(result);
             return response.status(200).json(result);
->>>>>>> 44a86c4772984d5d0dfcdca3c11d6fd30ece375b
+
         }).catch(err => {
             console.log(err);
             return response.status(500).json({ err: "server err.." })
         });
 }
 
-<<<<<<< HEAD
+
 exports.delete = (request, response) => {
     machinaryM.deleteOne({ _id: request.params.id })
         .then((result) => {
@@ -64,7 +64,8 @@ exports.delete = (request, response) => {
             console.log(err);
             return response.status(500).json({ err: "server err..." })
         });
-=======
+    }
+
 exports.delete=(request,response)=>{
     machinaryM.deleteOne({_id:request.params.id})
     .then((result)=>{
@@ -75,7 +76,7 @@ exports.delete=(request,response)=>{
         console.log(err);
         return response.status(500).json({err:"server err..."})
     });
->>>>>>> 44a86c4772984d5d0dfcdca3c11d6fd30ece375b
+
 }
 
 exports.bookmachines = async(request, response) => {
@@ -99,4 +100,3 @@ exports.bookmachines = async(request, response) => {
 
 }
 
-exports.cancellmachine = (request, response) => {}
