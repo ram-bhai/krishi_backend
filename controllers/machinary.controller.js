@@ -2,7 +2,7 @@ const { json } = require('body-parser');
 const { response } = require('express');
 const { request } = require('express');
 const machinaryM = require('../models/machinary.model');
-
+const User = require('../models/user.model');
 exports.add = (request, response) => {
     let a = request.body.name;
     let b = request.body.images;
@@ -18,7 +18,21 @@ exports.add = (request, response) => {
     });
 
 }
+exports.viewWithId = (request,response) => {
+    machinaryM.findOne({_id:request.params.id}).then(result => {
+        console.log(result);
+        // User.findOne({_id:request.user.id}).then(resultUser=>{
+        //     console.log(resultUser);
+             return response.status(200).json(result);
+        // }).catch(err=>{
+        //     return response.status(200).json(err);
+        // })
+    }).catch(err => {
+        console.log(err);
+        return response.status(500).json({ err: "server err.." });
+    });
 
+}
 exports.view = (request, response) => {
     machinaryM.find().then(result => {
         return response.status(200).json(result);
