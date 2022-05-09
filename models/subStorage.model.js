@@ -8,7 +8,7 @@ const subStorageSchema = new mongoose.Schema({
     },
     total_space: {
         type: String,
-        required: true
+
     },
     isAvailable: {
         type: Boolean,
@@ -33,18 +33,19 @@ const subStorageSchema = new mongoose.Schema({
     }],
     location: {
         type: String,
-        required: true
+
     },
     description_1: {
         type: String,
-        required: true
+
     },
     customers: [{
-        user: Schema.Types.ObjectId,
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "users"
+        },
         amount: String,
-        measurement: String,
         start_date: Date,
-        end_date: Date,
         item: [{
             name: String,
             weight: String,
