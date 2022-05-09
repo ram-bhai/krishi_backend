@@ -35,17 +35,21 @@ const subStorageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    description_1:{
-         type:String,
-         required:true
+    description_1: {
+        type: String,
+        required: true
     },
     customers: [{
         user: Schema.Types.ObjectId,
-        item: Schema.Types.ObjectId,
         amount: String,
         measurement: String,
         start_date: Date,
         end_date: Date,
+        item: [{
+            name: String,
+            weight: String,
+            isAvailable: Boolean
+        }]
     }],
     review: [{
         user: Schema.Types.ObjectId,

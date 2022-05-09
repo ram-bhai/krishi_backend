@@ -20,7 +20,7 @@ exports.add = (request, response) => {
         });
 }
 
-exports.additems = async (request, response) => {
+exports.additems = async(request, response) => {
     const item = {
         name: request.body.name,
         charges: request.body.charges,
@@ -116,8 +116,8 @@ exports.update = (request, response) => {
                 total_space: request.body.total_space,
                 isAvailable: request.body.isAvailable,
                 images: request.body.images,
-                location: request.body.location       
-             }
+                location: request.body.location
+            }
         })
         .then(result => {
             return response.status(200).json(result);
@@ -148,12 +148,31 @@ exports.bookstorage = async(request, response) => {
 
 }
 
-// exports.customerlist = async (request,response)=>{
-//     var storage = await substorageM.findOne({_id:request.params.id})
-//     if(storage){
-//         for (let i = 0; i < storage.customers.length; i++) {
-//             if (storage.customers[i].name == request.body.id) {
-//                 storage.customers.pull({ _id: request.body.id });
+exports.itemsofcustomer = async(request, response) => {
+    const products = {
+        name: request.body.name,
+        weight: request.body.weight,
+        isAvailable: request.body.isAvailable
+    }
+    var storage = await substorageM.findOne({ _id: request.body.storageid })
+    if (storage) {
+        var result = storage.customers.filter(obj => {
+            return obj._id == (request.body.id)
+        })
+        console.log(result.item);
 
-//     }
-// }
+        // result.save().then(next => {
+        //     storage.save().then(result => {
+        //         return response.status(201).json(result)
+        //     }).catch(
+        //         err => {
+        //             return response.status(500).json(err);
+        //         }).catch(error => {
+        //         return response.status(403).json(error, { error: "unable to reach from item in customers" })
+        //     })
+
+
+
+        // })
+    }
+}
