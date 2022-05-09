@@ -83,6 +83,7 @@ exports.signin = async(request, response) => {
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
+            console.log("invalid password");
             return response
                 .status(400)
                 .json({ errors: [{ msg: 'Invalid Password' }] });
@@ -99,13 +100,16 @@ exports.signin = async(request, response) => {
             payload,
             config.get('jwtSecret'), { expiresIn: '5 days' },
             (err, token) => {
-                if (err) throw err;
-                response.json({ token });
+                if (err){
+                    console.log(err);
+                }
+                console.log(token);
+                response.status(200).json( token );
             }
         );
     } catch (err) {
         console.error(err.message);
-        response.status(500).send('Server error');
+        response.status(500).json({msg:'Server error'});
     }
 
 }
@@ -120,33 +124,34 @@ exports.contact = (request, response) => {
         message: request.body.message,
         name: request.body.name,
         email: request.body.email
-       }).then(result => {
+    }).then(result => {
+        console.log("sucessfully login");
         return response.status(200).json({ message: "Message recieved" })
-      }).catch(error => {
+    }).catch(error => {
+        console.log(error);
         return response.status(500).json(error)
     })
 
 }
 
 exports.contract = (request, response) => {
-    const errors = validationResult(request)
-    if (!errors.isEmpty)
-        return response.status(400).json({ errors: errors.array() });
-
+  //  const errors = validationResult(request)
+    // if (!errors.isEmpty)
+    //     return response.status(400).json({ errors: errors.array() });
+  console.log("request.body result"+request.body);
     contract.create({
         name: request.body.name,
         mobile: request.body.mobile,
-        image: request.body.image,
+    
         Area: request.body.area,
-        address: request.body.address,
-        verification: request.body.verification,
-        start_date: request.body.startdate,
-        end_date: request.body.enddate,
-        isApproved: request.body.isapproved
-
+        
+        duration: request.body.duration,
+        description: request.body.description
+   
         }).then(result => {
         return response.status(200).json(result)
       }).catch(error => {
+
         return response.status(500).json(error)
     })
 }

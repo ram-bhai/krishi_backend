@@ -24,14 +24,14 @@ router.post("/contact",
     body("message").notEmpty(), auth, userController.contact);
 
 router.post("/contract-farming",
-    body("name").notEmpty(),
-    body("mobile").isLength(10),
-    body("image").notEmpty(),
-    body("area").notEmpty(),
-    body("address").notEmpty(),
-    body("startdate").isDate().notEmpty(),
-    body("enddate").isDate().notEmpty(),
-    auth, userController.contract);
+//     body("name").notEmpty(),
+//    // body("mobile").isLength(10),
+//    // body("image").notEmpty(),
+//     // body("area").notEmpty(),
+//     // body("address").notEmpty(),
+//     // body("startdate").isDate().notEmpty(),
+//     // body("enddate").isDate().notEmpty(),
+     userController.contract);
 
 
 module.exports = router;
