@@ -6,6 +6,7 @@ router.post('/add/:id', substorecontroller.add);
 router.post("/additems", substorecontroller.additems);
 router.post("/updatestorageitems/:id", substorecontroller.updateitems);
 router.post("/delete-items/:id", substorecontroller.deleteitems);
+//router.get("/view-item-list", substorecontroller.viewItems);
 router.post("/bookstorage/:id", substorecontroller.bookstorage);
 router.post("/add-items-in-coldstorage-by-customers", substorecontroller.itemsofcustomer);
 router.get("/view", substorecontroller.view);
