@@ -17,6 +17,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 
+
 exports.signup = async(request, response) => {
     const errors = validationResult(request);
     if (!errors.isEmpty())
@@ -125,6 +126,7 @@ exports.contact = (request, response) => {
         name: request.body.name,
         email: request.body.email
     }).then(result => {
+
         console.log("sucessfully login");
         return response.status(200).json({ message: "Message recieved" })
     }).catch(error => {
@@ -134,24 +136,27 @@ exports.contact = (request, response) => {
 
 }
 
-exports.contract = (request, response) => {
-  //  const errors = validationResult(request)
-    // if (!errors.isEmpty)
-    //     return response.status(400).json({ errors: errors.array() });
-  console.log("request.body result"+request.body);
+
+exports.contract = (request, response, next) => {
+
+    const errors = validationResult(request)
+    if (!errors.isEmpty)
+        return response.status(400).json({ errors: errors.array() });
+
     contract.create({
         name: request.body.name,
         mobile: request.body.mobile,
-    
+        image: "https://firebasestorage.googleapis.com/v0/b/krishi-sakha-f07d5.appspot.com/o/" + request.file.filename + "?alt=media&token=abcddcba",
         Area: request.body.area,
-        
-        duration: request.body.duration,
-        description: request.body.description
-   
-        }).then(result => {
-        return response.status(200).json(result)
-      }).catch(error => {
+        address: request.body.address,
+        verification: request.body.verification,
+        start_date: request.body.startdate,
+        end_date: request.body.enddate,
+        isApproved: request.body.isapproved
 
+    }).then(result => {
+        return response.status(200).json(result)
+    }).catch(error => {
         return response.status(500).json(error)
     })
 }
