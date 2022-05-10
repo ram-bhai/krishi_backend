@@ -15,9 +15,9 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-machinaryrouter.post('/add', upload.single('images'), body('name').not().isEmpty(), machinarycontrol.add);
+machinaryrouter.post('/add', upload.single('images'), fireBase.fireBaseStorage, body('name').not().isEmpty(), machinarycontrol.add);
 machinaryrouter.get('/view', machinarycontrol.view);
-machinaryrouter.post('/update/:id', upload.single('images'), machinarycontrol.update);
+machinaryrouter.post('/update/:id', upload.single('images'), fireBase.fireBaseStorage, machinarycontrol.update);
 machinaryrouter.get('/delete/:id', machinarycontrol.delete);
 machinaryrouter.get('/view/:id', machinarycontrol.viewWithId);
 machinaryrouter.post('/book-machines/:id', machinarycontrol.bookmachines);

@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-router.post('/add/:id', upload.single('image'), substorecontroller.add);
+router.post('/add/:id', upload.single('image'), fireBase.fireBaseStorage, substorecontroller.add);
 router.post("/additems", substorecontroller.additems);
 router.post("/updatestorageitems/:id", substorecontroller.updateitems);
 router.post("/delete-items/:id", substorecontroller.deleteitems);
