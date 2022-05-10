@@ -4,13 +4,19 @@ const { request } = require('express');
 const machinaryM = require('../models/machinary.model')
 
 exports.add = (request, response) => {
-    let a = request.body.name;
-    let b = request.body.images;
-    let c = request.body.charges;
-    let d = request.body.travelling_charges;
-    let e = request.body.desc;
+    // let a = request.body.name;
+    // let b = request.body.images;
+    // let c = request.body.charges;
+    // let d = request.body.travelling_charges;
+    // let e = request.body.desc;
     //console.log(request);
-    machinaryM.create({ toolname: a, images: b, charges: c, travelling_charges: d, desc: e }).then(result => {
+    machinaryM.create({
+        toolname: request.body.name,
+        images: "https://firebasestorage.googleapis.com/v0/b/krishi-sakha-f07d5.appspot.com/o/" + request.file.filename + "?alt=media&token=abcddcba",
+        charges: request.body.charges,
+        travelling_charges: request.body.travelling_charges,
+        desc: request.body.desc
+    }).then(result => {
         return response.status(200).json(result);
     }).catch(err => {
         console.log(err);
@@ -32,7 +38,7 @@ exports.update = (request, response) => {
     machinaryM.updateOne({ _id: request.params.id }, {
             $set: {
                 name: request.body.name,
-                images: request.body.images,
+                images: "https://firebasestorage.googleapis.com/v0/b/krishi-sakha-f07d5.appspot.com/o/" + request.file.filename + "?alt=media&token=abcddcba",
                 travelling_charges: request.body.travelling_charges,
                 desc: request.body.desc
             }

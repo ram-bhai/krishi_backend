@@ -9,7 +9,7 @@ exports.add = (request, response) => {
             total_space: request.body.total_space,
             isAvailable: request.body.isAvailable,
             location: request.body.location,
-            images: request.body.images,
+            images: "https://firebasestorage.googleapis.com/v0/b/krishi-sakha-f07d5.appspot.com/o/" + request.file.filename + "?alt=media&token=abcddcba",
             description_1: request.body.description_1,
         })
         .then(result => {
