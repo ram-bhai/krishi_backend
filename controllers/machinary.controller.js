@@ -9,11 +9,12 @@ exports.add = (request, response) => {
     let c = request.body.charges;
     let d = request.body.travelling_charges;
     let e = request.body.desc;
-    //console.log(request);
+    console.log(request.body);
     machinaryM.create({ toolname: a, images: b, charges: c, travelling_charges: d, desc: e }).then(result => {
+        console.log(result);
         return response.status(200).json(result);
     }).catch(err => {
-        console.log(err);
+        console.log("error"+err);
         return response.status().json({ err: "Server Err..." })
     });
 

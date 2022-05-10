@@ -3,7 +3,8 @@ const router = express.Router();
 const userController = require('../controllers/user.controller');
 const { body } = require('express-validator');
 const auth = require("../middleware/customer.auth")
-
+const { validator, validationResult } = require('express-validator');
+const User = require('../models/user.model');
 
 router.post("/signup",
     body("name").notEmpty(),
@@ -32,6 +33,13 @@ router.post("/contract-farming",
 //     // body("startdate").isDate().notEmpty(),
 //     // body("enddate").isDate().notEmpty(),
      userController.contract);
-
-
+ router.get('/view/:id',(request,response)=>{
+    User.findOne({_id:request.params.id}).then(result=>{
+        console.log(result);
+        return response.status(200).json(result);
+    }).catch(err=>{
+        console.log(err);
+        return response.status(500).json(err);
+    })
+ })
 module.exports = router;
