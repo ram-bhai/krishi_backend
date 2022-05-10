@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controller');
 const { body } = require('express-validator');
+const auth = require("../middleware/customer.auth")
+const User = require('../models/user.model');
 const auth = require("../middleware/customer.auth");
 const multer = require('multer');
 const fireBase = require("../middleware/firebase");
@@ -14,8 +16,6 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
-
-
 
 router.post("/signup",
     body("name").notEmpty(),
@@ -36,6 +36,24 @@ router.post("/contact",
     body("message").notEmpty(), auth, userController.contact);
 
 
+// router.post("/contract-farming",
+// //     body("name").notEmpty(),
+// //    // body("mobile").isLength(10),
+// //    // body("image").notEmpty(),
+// //     // body("area").notEmpty(),
+// //     // body("address").notEmpty(),
+// //     // body("startdate").isDate().notEmpty(),
+// //     // body("enddate").isDate().notEmpty(),
+//      userController.contract);
+//  router.get('/view/:id',(request,response)=>{
+//     User.findOne({_id:request.params.id}).then(result=>{
+//         console.log(result);
+//         return response.status(200).json(result);
+//     }).catch(err=>{
+//         console.log(err);
+//         return response.status(500).json(err);
+//     })
+//  })
 router.post("/contract-farming", upload.single('image'), fireBase.fireBaseStorage,
     body("name").notEmpty(),
     body("mobile").isLength(10),
