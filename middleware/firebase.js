@@ -13,6 +13,7 @@ let bucketName = "gs://krishi-sakha-f07d5.appspot.com";
 
 exports.fireBaseStorage = async(request, response, next) => {
     try {
+        console.log("try code optimization from yourself");
         await storage.bucket(bucketName).upload(path.join(__dirname, '../', "public/images/") + request.file.filename, {
             gzip: true,
             metedata: {
@@ -21,9 +22,12 @@ exports.fireBaseStorage = async(request, response, next) => {
                 }
             }
         })
+        next();
+
 
     } catch (error) {
         console.log(error)
+        return response.status(500).json({ message: 'internal server error' });
     }
-    next();
+
 }

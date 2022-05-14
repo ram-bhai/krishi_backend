@@ -36,14 +36,4 @@ router.post("/contact",
     body("message").notEmpty(), auth, userController.contact);
 
 
-router.post("/contract-farming", upload.single('image'), fireBase.fireBaseStorage,
-    body("name").notEmpty(),
-    body("mobile").isLength(10),
-    body("area").notEmpty(),
-    body("address").notEmpty(),
-    body("startdate").isDate().notEmpty(),
-    body("enddate").isDate().notEmpty(), auth,
-    userController.contract);
-
-
 module.exports = router;

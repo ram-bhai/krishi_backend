@@ -9,7 +9,7 @@ mongoose.connect("mongodb+srv://group:group@cluster0.njsxd.mongodb.net/krishi?re
 }).catch(error => {
     console.log("Unable to connect from database")
 })
-
+const contractrouter = require("./routes/contract-farming.routes");
 const substoreRouter = require("./routes/substorage.routes");
 const stores = require("./routes/store.routes");
 const adminRouter = require("./routes/admin.routes");
@@ -32,6 +32,7 @@ app.use("/substore", substoreRouter);
 app.use("/store", stores);
 app.use("/admin", adminRouter);
 app.use("/machinary", machinaryRouter);
+app.use("/contract", contractrouter);
 app.use("/user", userRouter);
 app.use("/search", searchRouter);
 

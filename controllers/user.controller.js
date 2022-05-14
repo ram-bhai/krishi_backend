@@ -1,7 +1,6 @@
 const { validator, validationResult } = require('express-validator');
 const User = require('../models/user.model');
 const queries = require('../models/query.models');
-const contract = require('../models/contract_farming.model')
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const config = require('config');
@@ -101,16 +100,16 @@ exports.signin = async(request, response) => {
             payload,
             config.get('jwtSecret'), { expiresIn: '5 days' },
             (err, token) => {
-                if (err){
+                if (err) {
                     console.log(err);
                 }
                 console.log(token);
-                response.status(200).json( token );
+                response.status(200).json(token);
             }
         );
     } catch (err) {
         console.error(err.message);
-        response.status(500).json({msg:'Server error'});
+        response.status(500).json({ msg: 'Server error' });
     }
 
 }
@@ -134,29 +133,4 @@ exports.contact = (request, response) => {
         return response.status(500).json(error)
     })
 
-}
-
-
-exports.contract = (request, response, next) => {
-
-    const errors = validationResult(request)
-    if (!errors.isEmpty)
-        return response.status(400).json({ errors: errors.array() });
-
-    contract.create({
-        name: request.body.name,
-        mobile: request.body.mobile,
-        image: "https://firebasestorage.googleapis.com/v0/b/krishi-sakha-f07d5.appspot.com/o/" + request.file.filename + "?alt=media&token=abcddcba",
-        Area: request.body.area,
-        address: request.body.address,
-        verification: request.body.verification,
-        start_date: request.body.startdate,
-        end_date: request.body.enddate,
-        isApproved: request.body.isapproved
-
-    }).then(result => {
-        return response.status(200).json(result)
-    }).catch(error => {
-        return response.status(500).json(error)
-    })
 }
