@@ -36,32 +36,5 @@ router.post("/contact",
     body("message").notEmpty(), auth, userController.contact);
 
 
-// router.post("/contract-farming",
-// //     body("name").notEmpty(),
-// //    // body("mobile").isLength(10),
-// //    // body("image").notEmpty(),
-// //     // body("area").notEmpty(),
-// //     // body("address").notEmpty(),
-// //     // body("startdate").isDate().notEmpty(),
-// //     // body("enddate").isDate().notEmpty(),
-//      userController.contract);
-//  router.get('/view/:id',(request,response)=>{
-//     User.findOne({_id:request.params.id}).then(result=>{
-//         console.log(result);
-//         return response.status(200).json(result);
-//     }).catch(err=>{
-//         console.log(err);
-//         return response.status(500).json(err);
-//     })
-//  })
-router.post("/contract-farming", upload.single('image'), fireBase.fireBaseStorage,
-    body("name").notEmpty(),
-    body("mobile").isLength(10),
-    body("area").notEmpty(),
-    body("address").notEmpty(),
-    body("startdate").isDate().notEmpty(),
-    body("enddate").isDate().notEmpty(), auth,
-    userController.contract);
-
 
 module.exports = router;

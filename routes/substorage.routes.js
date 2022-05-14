@@ -1,8 +1,19 @@
 const express = require('express');
 const substorecontroller = require("../controllers/substorage.controller");
 const router = express.Router();
+const multer = require('multer');
+const fireBase = require("../middleware/firebase");
 
-router.post('/add/:id', substorecontroller.add);
+
+var storage = multer.diskStorage({
+    destination: 'public/images',
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + "-" + file.originalname);
+    }
+});
+var upload = multer({ storage: storage });
+
+router.post('/add/:id', upload.single('image'), fireBase.fireBaseStorage, substorecontroller.add);
 router.post("/additems", substorecontroller.additems);
 router.post("/updatestorageitems/:id", substorecontroller.updateitems);
 router.post("/delete-items/:id", substorecontroller.deleteitems);

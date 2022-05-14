@@ -4,26 +4,40 @@ const Schema = mongoose.Schema;
 const contractSchema = new mongoose.Schema({
     name: {
         type: String,
-    
+
+    },
+    email: {
+        type: String,
+
     },
     mobile: {
         type: String,
+
     },
     image: {
         type: String,
-    
+
+    },
+    address: {
+        type: String,
+
     },
     Area: {
         type: String,
-    
+
     },
-    
+
     verification: {
         type: Boolean,
         default: false
     },
-    duration: {
-        type: String,
+    start_date: {
+        type: Date,
+
+    },
+    end_date: {
+        type: Date,
+
     },
     isApproved: {
         type: Boolean,
@@ -31,6 +45,7 @@ const contractSchema = new mongoose.Schema({
     },
     description: {
         type: String,
+
     },
     date: {
         type: Date,
