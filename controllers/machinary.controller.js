@@ -19,7 +19,7 @@ exports.add = (request, response) => {
     }).then(result => {
         return response.status(200).json(result);
     }).catch(err => {
-        console.log(err);
+        console.log("error"+err);
         return response.status().json({ err: "Server Err..." })
     });
 

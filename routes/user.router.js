@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controller');
 const { body } = require('express-validator');
+const auth = require("../middleware/customer.auth")
+const User = require('../models/user.model');
 const auth = require("../middleware/customer.auth");
 const multer = require('multer');
 const fireBase = require("../middleware/firebase");
@@ -14,8 +16,6 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
-
-
 
 router.post("/signup",
     body("name").notEmpty(),
@@ -34,6 +34,7 @@ router.post("/contact",
     body("name").notEmpty(),
     body("email").isEmail(),
     body("message").notEmpty(), auth, userController.contact);
+
 
 
 module.exports = router;

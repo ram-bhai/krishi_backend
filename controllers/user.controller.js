@@ -104,7 +104,9 @@ exports.signin = async(request, response) => {
                     console.log(err);
                 }
                 console.log(token);
+
                 response.status(200).json(token);
+                response.status(200).json( {token:token , user: user});
             }
         );
     } catch (err) {
